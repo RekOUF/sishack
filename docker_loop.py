@@ -26,11 +26,19 @@ def run_once():
 
 if __name__ == "__main__":
     interval = int(os.environ.get("INTERVAL_MINUTES", "5"))
+    account_set = bool(os.environ.get("SISELI_ACCOUNT"))
+    password_set = bool(os.environ.get("SISELI_PASSWORD"))
+    ha_url = os.environ.get("HA_URL", "<not set>")
+    ha_token_set = bool(os.environ.get("HA_TOKEN"))
+    print(f"[{datetime.now():%H:%M:%S}] sishack starting")
+    print(f"[{datetime.now():%H:%M:%S}] interval={interval}min, account_set={account_set}, password_set={password_set}, ha_url={ha_url}, ha_token_set={ha_token_set}")
     # Run immediately on start, then every interval
     while True:
         try:
             run_once()
         except Exception as e:
             print(f"[{datetime.now():%H:%M:%S}] Error: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
         print(f"[{datetime.now():%H:%M:%S}] Sleeping {interval} minutes...")
         time.sleep(interval * 60)

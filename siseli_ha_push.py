@@ -74,8 +74,11 @@ def scrape_data():
         [sys.executable, os.path.join(os.path.dirname(__file__), "siseli_scraper.py"), DATA_FILE],
         capture_output=True, text=True, timeout=120
     )
+    print(result.stdout, end="")
+    if result.stderr:
+        print(result.stderr, file=sys.stderr, end="")
     if result.returncode != 0:
-        print(f"Scraper failed (rc={result.returncode}): {result.stderr[-500:]}")
+        print(f"Scraper failed (rc={result.returncode})")
         return None
     print("Scraper done.")
     return None
