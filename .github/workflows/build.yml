@@ -64,19 +64,13 @@ jobs:
 
       - name: Create and push multi-arch manifest
         run: |
-          docker manifest create \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0 \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.0
-          docker manifest annotate ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0 \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.0 --arch amd64
-          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
+          docker buildx imagetools create \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0 \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.0
 
-          docker manifest create \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.0
-          docker manifest annotate ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.0 --arch amd64
-          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker buildx imagetools create \
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.0
         shell: bash
 
       - name: Make GHCR package public
