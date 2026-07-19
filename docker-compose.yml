@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  sishack:
+    build: .
+    container_name: sishack
+    restart: unless-stopped
+    environment:
+      - SISELI_ACCOUNT=rvrhee@gmail.com
+      - SISELI_PASSWORD=***REMOVED***
+      - HA_URL=http://homeassistant.local:8123
+      - HA_TOKEN=your_ha_long_lived_token
+      - INTERVAL_MINUTES=5
+    # Uncomment if HA runs in another container on the same Docker network:
+    # network_mode: host
