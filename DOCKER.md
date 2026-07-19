@@ -19,7 +19,7 @@ docker compose up -d --build
 | `HA_TOKEN` | HA long-lived access token | required |
 | `INTERVAL_MINUTES` | Scrape interval | `5` |
 
-> When running in Docker, set `HA_URL` to the **IP** of your HA host (e.g. `http://192.168.177.87:8123`) and use `--network host` (see below). `homeassistant.local` usually does not resolve inside a container.
+> When running in Docker, set `HA_URL` to the **IP** of your HA host (e.g. `http://your_ha_ip:8123`) and use `--network host` (see below). `homeassistant.local` usually does not resolve inside a container.
 
 ## HA OS / add-on
 
@@ -32,9 +32,9 @@ docker run -d \
   --name sishack \
   --restart unless-stopped \
   --network host \
-  -e SISELI_ACCOUNT=rvrhee@gmail.com \
-  -e SISELI_PASSWORD=your_password \
-  -e HA_URL=http://192.168.177.87:8123 \
+  -e SISELI_ACCOUNT=your_siseli_account \
+  -e SISELI_PASSWORD=your_siseli_password \
+  -e HA_URL=http://your_ha_ip:8123 \
   -e HA_TOKEN=your_token \
   -e INTERVAL_MINUTES=5 \
   ghcr.io/rekouf/sishack:latest

@@ -22,7 +22,7 @@ cp .env.example .env
 # edit .env with your Siseli account/password and HA token/IP
 ```
 
-> Note: inside Docker `homeassistant.local` often does not resolve; use the IP address of your HA host (e.g. `http://192.168.177.87:8123`).
+> Note: inside Docker `homeassistant.local` often does not resolve; use the IP address of your HA host (e.g. `http://your_ha_ip:8123`).
 
 ## Run once
 
