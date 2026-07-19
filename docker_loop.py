@@ -5,6 +5,7 @@ import os
 import subprocess
 import sys
 import time
+import json
 from datetime import datetime
 
 PUSH_SCRIPT = os.path.join(os.path.dirname(__file__), "siseli_ha_push.py")
@@ -25,6 +26,20 @@ def run_once():
 
 
 if __name__ == "__main__":
+    # HA Supervisor stores add-on options in /data/options.json
+    options_path = "/data/options.json"
+    if os.path.exists(options_path):
+        try:
+            with open(options_path) as f:
+                options = json.load(f)
+            for key, value in options.items():
+                env_key = key.upper()
+                if env_key not in os.environ and value is not None:
+                    os.environ[env_key] = str(value)
+            print(f"Loaded {len(options)} options from {options_path}")
+        except Exception as e:
+            print(f"Could not load {options_path}: {e}", file=sys.stderr)
+
     interval = int(os.environ.get("INTERVAL_MINUTES", "5"))
     account_set = bool(os.environ.get("SISELI_ACCOUNT"))
     password_set = bool(os.environ.get("SISELI_PASSWORD"))

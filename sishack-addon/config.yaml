@@ -1,6 +1,6 @@
 name: "Siseli Solar"
 description: "Siseli Solar scraper + Home Assistant pusher (dummy-proof add-on)"
-version: "1.0.2"
+version: "1.0.3"
 slug: "sishack"
 init: false
 arch:
