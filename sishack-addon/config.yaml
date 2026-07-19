@@ -6,8 +6,6 @@ init: false
 arch:
   - amd64
   - aarch64
-  - armv7
-  - armhf
 startup: application
 boot: auto
 options:
