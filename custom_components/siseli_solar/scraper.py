@@ -190,26 +190,26 @@ def _parse(all_data: dict) -> dict:
         if "deviceState/simple/state/latest" in path and isinstance(d, dict) and "fields" in d:
             fields = d.get("fields", {})
             battery = {
-                "voltage_v": _get_field(fields, "batteryVoltage"),
-                "capacity_pct": _get_field(fields, "batteryCapacity"),
-                "soc_pct": _get_field(fields, "batterySoc"),
-                "charging_current_a": _get_field(fields, "batteryChargingCurrent"),
-                "discharge_current_a": _get_field(fields, "batteryDischargeCurrent"),
+                "voltage_v": _to_float(_get_field(fields, "batteryVoltage")),
+                "capacity_pct": _to_float(_get_field(fields, "batteryCapacity")),
+                "soc_pct": _to_float(_get_field(fields, "batterySoc")),
+                "charging_current_a": _to_float(_get_field(fields, "batteryChargingCurrent")),
+                "discharge_current_a": _to_float(_get_field(fields, "batteryDischargeCurrent")),
                 "state_code": _get_field(fields, "batteryState"),
                 "state_text": _get_field_display(fields, "batteryState"),
                 "type_code": _get_field(fields, "batteryType"),
                 "type_text": _get_field_display(fields, "batteryType"),
-                "rated_voltage_v": _get_field(fields, "batteryRatedVoltage"),
-                "low_cutoff_voltage_v": _get_field(fields, "batteryLowCutoffVoltage"),
-                "bulk_charging_voltage_v": _get_field(fields, "batteryBulkChargingVoltage"),
-                "float_charging_voltage_v": _get_field(fields, "batteryFloatChargingVoltage"),
-                "equalization_voltage_v": _get_field(fields, "batteryEqualizationVoltage"),
-                "max_charge_current_a": _get_field(fields, "batteryMaxChargeCurrent"),
-                "utility_charge_current_a": _get_field(fields, "utilityChargeCurrent"),
+                "rated_voltage_v": _to_float(_get_field(fields, "batteryRatedVoltage")),
+                "low_cutoff_voltage_v": _to_float(_get_field(fields, "batteryLowCutoffVoltage")),
+                "bulk_charging_voltage_v": _to_float(_get_field(fields, "batteryBulkChargingVoltage")),
+                "float_charging_voltage_v": _to_float(_get_field(fields, "batteryFloatChargingVoltage")),
+                "equalization_voltage_v": _to_float(_get_field(fields, "batteryEqualizationVoltage")),
+                "max_charge_current_a": _to_float(_get_field(fields, "batteryMaxChargeCurrent")),
+                "utility_charge_current_a": _to_float(_get_field(fields, "utilityChargeCurrent")),
                 "charge_priority_code": _get_field(fields, "chargePriority"),
                 "charge_priority_text": _get_field_display(fields, "chargePriority"),
             }
-            result["battery"] = {k: _to_float(v, v) if v is not None else None for k, v in battery.items()}
+            result["battery"] = battery
 
         if "deviceState/simple/energy/flow" in path and isinstance(d, dict) and "fields" in d:
             fields = d.get("fields", {})
