@@ -22,4 +22,4 @@ schema:
 map:
   - type: homeassistant_config
     read_only: false
-image: "ghcr.io/rekouf/{arch}-sishack"
+image: "ghcr.io/rekouf/sishack"
