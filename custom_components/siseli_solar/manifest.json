@@ -1,0 +1,13 @@
+{
+  "domain": "siseli_solar",
+  "name": "Siseli Solar",
+  "codeowners": ["@ReKOUF"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/ReKOUF/sishack",
+  "iot_class": "cloud_polling",
+  "requirements": [
+    "playwright>=1.40.0"
+  ],
+  "version": "1.0.0"
+}

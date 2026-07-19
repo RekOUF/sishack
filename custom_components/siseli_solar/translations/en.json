@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Siseli Solar",
+        "description": "Enter your Siseli Solar account credentials.",
+        "data": {
+          "account": "Account / Email",
+          "siseli_password": "Password",
+          "base_url": "Siseli portal URL"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Account is already configured"
+    }
+  }
+}

@@ -42,4 +42,21 @@ Via Hermes cron job `siseli-solar-ha-push` (every 5 minutes) or plain crontab:
 `sensor.solar_*` — daily/monthly/yearly/total energy, installed capacity, CO2 saved, status.
 `sensor.battery_*` — voltage, SOC, charge/discharge current & power, state, rated/bulk/float/low-cutoff voltages.
 `sensor.solar_generation_power`, `sensor.solar_load_power`, `sensor.solar_feed_in_power`, `sensor.pv_input_power`.
-`sensor.siseli_*_energy` — accumulated energy counters derived from instantaneous power readings.
+> `sensor.siseli_*_energy` — accumulated energy counters derived from instantaneous power readings.
+
+## HACS / Home Assistant Custom Component
+
+This repo also contains a Home Assistant custom component in `custom_components/siseli_solar/`.
+
+### Install
+
+1. Copy the folder `custom_components/siseli_solar` into your Home Assistant `config/custom_components/` directory.
+2. Restart Home Assistant.
+3. Go to **Settings > Devices & Services > Add Integration** and search for "Siseli Solar".
+4. Enter your Siseli account (e-mail) and password. The integration will create all sensors automatically and update every 5 minutes.
+
+> Note: the Home Assistant host must be able to run Playwright/Chromium. On HA OS this may require the custom component to be run in a container with Chromium available, or use a supervised/core install where you can install the Playwright browsers.
+
+### Sensors
+
+The custom component creates the same sensor set as the standalone pusher script: all solar production, battery, and power flow sensors listed above.

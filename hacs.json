@@ -1,0 +1,7 @@
+{
+  "name": "Siseli Solar",
+  "content_in_root": false,
+  "country": ["NL"],
+  "iot_class": "Cloud Polling",
+  "render_readme": true
+}

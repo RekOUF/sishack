@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Siseli Solar",
+        "description": "Voer je Siseli Solar inloggegevens in.",
+        "data": {
+          "account": "Account / E-mail",
+          "siseli_password": "Wachtwoord",
+          "base_url": "Siseli portal URL"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbinding mislukt",
+      "invalid_auth": "Ongeldige inloggegevens",
+      "unknown": "Onverwachte fout"
+    },
+    "abort": {
+      "already_configured": "Account is al geconfigureerd"
+    }
+  }
+}
