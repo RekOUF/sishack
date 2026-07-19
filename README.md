@@ -48,6 +48,18 @@ Via Hermes cron job `siseli-solar-ha-push` (every 5 minutes) or plain crontab:
 
 ## HACS / Home Assistant Custom Component
 
-The repo also contains a Home Assistant custom component in `custom_components/siseli_solar/`. It requires Playwright/Chromium on the HA host, which can be heavy on HA OS. For HA OS, use the Docker container instead.
+The repo also contains a Home Assistant custom component in `custom_components/siseli_solar/`. It requires Playwright/Chromium on the HA host, which can be heavy on HA OS.
 
-See [DOCKER.md](DOCKER.md) for container setup.
+## HA OS Add-on (recommended for HA OS)
+
+For Home Assistant OS there is a ready-made add-on in `sishack-addon/`. Add this repo to your HA Add-on Store:
+
+```
+https://github.com/ReKOUF/sishack
+```
+
+Then install **Siseli Solar**, enter your account + password + HA token in the add-on configuration, and start it. See [ADDON.md](ADDON.md).
+
+## Docker / Container (manual)
+
+You can also run the scraper+pusher inside a container manually. See [DOCKER.md](DOCKER.md).

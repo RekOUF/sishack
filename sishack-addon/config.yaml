@@ -1,0 +1,28 @@
+name: "Siseli Solar"
+description: "Siseli Solar scraper + Home Assistant pusher (dummy-proof add-on)"
+version: "1.0.0"
+slug: "sishack"
+init: false
+arch:
+  - amd64
+  - aarch64
+  - armv7
+  - armhf
+startup: application
+boot: auto
+options:
+  SISELI_ACCOUNT: ""
+  SISELI_PASSWORD: ""
+  HA_URL: "http://homeassistant:8123"
+  HA_TOKEN: ""
+  INTERVAL_MINUTES: 5
+schema:
+  SISELI_ACCOUNT: str
+  SISELI_PASSWORD: password
+  HA_URL: str
+  HA_TOKEN: password
+  INTERVAL_MINUTES: int
+map:
+  - type: homeassistant_config
+    read_only: false
+image: "ghcr.io/rekouf/{arch}-sishack"
