@@ -95,13 +95,16 @@ async def main():
         if not await login(page):
             await page.screenshot(path="/tmp/siseli_login_fail.png")
             print("Login failed!")
+            print(f"Current URL: {page.url}")
             await browser.close()
             return
+        print("Login OK", flush=True)
 
         # Navigate to overview first
         print("Overview...", flush=True)
         await page.goto(f"{URL}/#/operations/overview", wait_until="networkidle")
         await page.wait_for_timeout(5000)
+        print(f"Overview loaded, captured {len(cap.responses)} API responses so far", flush=True)
 
         # Click the station row to expand details — this triggers detail API calls
         print("Station list...", flush=True)
@@ -111,6 +114,7 @@ async def main():
         # Navigate to station list via link click
         await page.goto(f"{URL}/#/operations/station/list", wait_until="networkidle")
         await page.wait_for_timeout(3000)
+        print(f"Station list loaded, captured {len(cap.responses)} API responses so far", flush=True)
 
         # Try to click on the station name to open detail
         print("Station detail...", flush=True)
@@ -119,8 +123,9 @@ async def main():
             if await station_link.count() > 0:
                 await station_link.first.click()
                 await page.wait_for_timeout(5000)
-        except Exception:
-            pass
+                print("Clicked station link", flush=True)
+        except Exception as e:
+            print(f"Station link click skipped: {e}", flush=True)
 
         # Try View link
         try:
@@ -128,13 +133,15 @@ async def main():
             if await view_btn.count() > 0:
                 await view_btn.first.click()
                 await page.wait_for_timeout(6000)
-        except Exception:
-            pass
+                print("Clicked View button", flush=True)
+        except Exception as e:
+            print(f"View button click skipped: {e}", flush=True)
 
         # Navigate to the device detail page to capture battery telemetry
         print("Device detail (battery telemetry)...", flush=True)
         await page.goto(DEVICE_DETAIL_URL, wait_until="networkidle")
         await page.wait_for_timeout(8000)
+        print(f"Device detail loaded, captured {len(cap.responses)} API responses so far", flush=True)
 
         # Click the Battery tab if present to trigger battery-specific API calls
         try:
@@ -143,12 +150,14 @@ async def main():
                 await battery_tab.first.click(timeout=5000)
                 await page.wait_for_timeout(5000)
                 print("Clicked Battery tab", flush=True)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"Battery tab click skipped: {e}", flush=True)
 
         # Wait for any late API calls
         await page.wait_for_timeout(5000)
         page.remove_listener("response", cap.on_response)
+        print(f"Total captured API responses: {len(cap.responses)}", flush=True)
+        print(f"Unique endpoints: {len(cap.get_data())}", flush=True)
 
         all_data = cap.get_data()
 

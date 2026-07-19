@@ -44,7 +44,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/${{ matrix.arch }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-1.0.1
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-1.0.2
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -65,12 +65,12 @@ jobs:
       - name: Create and push multi-arch manifest
         run: |
           docker buildx imagetools create \
-            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.1 \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.1
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.2 \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.2
 
           docker buildx imagetools create \
             -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.1
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-1.0.2
         shell: bash
 
       - name: Make GHCR package public
