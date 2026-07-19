@@ -5,7 +5,6 @@ slug: "sishack"
 init: false
 arch:
   - amd64
-  - aarch64
 startup: application
 boot: auto
 options:
